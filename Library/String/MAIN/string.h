@@ -9,6 +9,7 @@ private:
     std::size_t CharacterNumber;
     std::size_t capacity;
     char* text;
+    char* AuxiliaryText;
     static std::size_t LengthOfConstChar(const char*);
 public:
     explicit String();

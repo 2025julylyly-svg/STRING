@@ -1,8 +1,8 @@
 #include "string.h"
 
-String::String() : CharacterNumber( 0 ), capacity( 10 ), text( new char[capacity] ) {}
+String::String() : CharacterNumber( 0 ), capacity( 10 ), text( new char[capacity] ), AuxiliaryText( nullptr ) {}
 
-String::String(const std::size_t& CAPACITY) : CharacterNumber( 0 ), capacity( CAPACITY ), text( new char[capacity] ) {}
+String::String(const std::size_t& CAPACITY) : CharacterNumber( 0 ), capacity( CAPACITY ), text( new char[capacity] ), AuxiliaryText( nullptr ) {}
 
 std::size_t String::LengthOfConstChar(const char* str) {
     if (str == nullptr) {
@@ -30,7 +30,16 @@ bool String::IsFull() const {
 }
 
 void String::Resize() {
-    
+    if (this->IsEmpty()) {
+        return;
+    }
+    capacity *= 2;
+    AuxiliaryText = new char[capacity];
+    for (std::size_t i = 0; i < this->CharacterNumber; ++i) {
+        *(AuxiliaryText + i) = *(this->text + i);
+    }
+    delete[] this->text;
+    this->text = AuxiliaryText;
 }
 
 void String::Clear() {
