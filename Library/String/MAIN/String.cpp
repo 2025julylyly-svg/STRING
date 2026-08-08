@@ -1,4 +1,4 @@
-#include "string.h"
+#include "String.h"
 
 String::String() : CharacterNumber( 0 ), capacity( 10 ), text( new char[capacity] ), AuxiliaryText( nullptr ) {}
 
@@ -39,7 +39,7 @@ void String::Resize() {
         *(AuxiliaryText + i) = *(this->text + i);
     }
     delete[] this->text;
-    this->text = AuxiliaryText;
+    this->text = this->AuxiliaryText;
 }
 
 void String::Clear() {
@@ -59,9 +59,27 @@ void String::Copy(const String& other) {
     }
 }
 
-String& String::operator+=(const char*) {}
+String& String::operator+=(const char* str) {
+    const std::size_t STR_LEN = String::LengthOfConstChar( str );
+    while (STR_LEN + this->CharacterNumber >= this->capacity) {
+        this->Resize();
+    }
+    for (std::size_t i = 0; i < STR_LEN; ++i) {
+        *(this->text + this->CharacterNumber++) = *(str + i);
+    }
+    return *this;
+}
 
-String& String::operator+=(const String&) {}
+String& String::operator+=(const String& other) {
+    const std::size_t STR_LEN = String::LengthOfConstChar( other.text );
+    while (STR_LEN + this->CharacterNumber >= this->capacity) {
+        this->Resize();
+    }
+    for (std::size_t i = 0; i < STR_LEN; ++i) {
+        *(this->text + this->CharacterNumber++) = *(other.text + i);
+    }
+    return *this;
+}
 
 String& String::operator=(const char* InputString) {
     this->Clear();
@@ -103,3 +121,5 @@ char String::operator[](const int index) const {
     }
     return '\0';
 }
+
+String::~String() = default;

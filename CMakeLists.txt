@@ -4,7 +4,7 @@ project(STRING)
 set(CMAKE_CXX_STANDARD 26)
 
 add_executable(STRING main.cpp
-        Library/String/MAIN/string.h
-        Library/String/MAIN/string.cpp
+        Library/String/MAIN/String.h
+        Library/String/MAIN/String.cpp
         Library/String/Error/IndexOutofReangeError/IndexOutofrange.h
         Library/String/Error/IndexOutofReangeError/IndexOutofrange.cpp)

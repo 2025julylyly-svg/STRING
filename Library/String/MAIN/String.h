@@ -28,4 +28,5 @@ public:
     String& operator=(const char*);
     String& operator=(const String&);
     char operator[](int) const;
+    ~String();
 };
