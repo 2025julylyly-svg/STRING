@@ -77,6 +77,10 @@ std::size_t String::Length() const {
     return this->CharacterNumber;
 }
 
+const char* String::Get() const {
+    return this->text;
+}
+
 String& String::operator+=(const char* str) {
     const std::size_t STR_LEN = String::LengthOfConstChar( str );
     while (STR_LEN + this->CharacterNumber >= this->capacity) {
