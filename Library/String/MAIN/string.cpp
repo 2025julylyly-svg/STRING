@@ -59,12 +59,16 @@ void String::Copy(const String& other) {
     }
 }
 
+String& String::operator+=(const char*) {}
+
+String& String::operator+=(const String&) {}
+
 String& String::operator=(const char* InputString) {
     this->Clear();
     this->CharacterNumber = String::LengthOfConstChar( InputString );
     this->capacity = this->CharacterNumber * 2;
     this->text = new char[this->capacity];
-    for (int i =0;i < this->CharacterNumber; ++i) {
+    for (int i = 0; i < this->CharacterNumber; ++i) {
         *(this->text + i) = *(InputString + i);
     }
     return *this;
@@ -94,7 +98,7 @@ char String::operator[](const int index) const {
         std::cerr << "Error: " << e.what();
         std::cout << std::endl;
     } catch (const std::exception& e) {
-        std::cerr <<"Error: " << e.what();
+        std::cerr << "Error: " << e.what();
         std::cout << std::endl;
     }
     return '\0';
