@@ -11,7 +11,7 @@ String::String(const String& other) : AuxiliaryText( nullptr ) {
     }
 }
 
-String::String(String&& other) {
+String::String(String&& other) noexcept {
     this->CharacterNumber = other.CharacterNumber;
     this->capacity = other.capacity;
     this->text = other.text;
@@ -35,6 +35,7 @@ String::String(const char* str) : AuxiliaryText( nullptr ) {
     for (int i = 0; i < this->CharacterNumber; ++i) {
         *(this->text + i) = *(str + i);
     }
+    this->AddNullChar();
 }
 
 String::String(const std::size_t& CAPACITY) : CharacterNumber( 0 ), capacity( CAPACITY ), text( new char[capacity] ), AuxiliaryText( nullptr ) {}
@@ -46,6 +47,13 @@ std::size_t String::LengthOfConstChar(const char* str) {
     std::size_t LengthCounter = 0;
     for (; str[LengthCounter] != '\0'; ++LengthCounter) {}
     return LengthCounter;
+}
+
+void String::AddNullChar() {
+    if (this->IsFull()) {
+        this->Resize();
+    }
+    *(this->text + this->CharacterNumber) = '\0';
 }
 
 char* String::begin() const {
@@ -103,8 +111,8 @@ std::size_t String::Length() const {
     return this->CharacterNumber;
 }
 
-const char* String::Get() const {
-    return this->text;
+char* String::Get() const {
+    return this->begin();
 }
 
 bool String::operator==(const String& other) const {
@@ -124,6 +132,7 @@ String& String::operator+=(char character) {
         this->Resize();
     }
     *(this->text + this->CharacterNumber++) = character;
+    this->AddNullChar();
     return *this;
 }
 
@@ -135,6 +144,7 @@ String& String::operator+=(const char* str) {
     for (std::size_t i = 0; i < STR_LEN; ++i) {
         *(this->text + this->CharacterNumber++) = *(str + i);
     }
+    this->AddNullChar();
     return *this;
 }
 
@@ -146,6 +156,7 @@ String& String::operator+=(const String& other) {
     for (std::size_t i = 0; i < STR_LEN; ++i) {
         *(this->text + this->CharacterNumber++) = *(other.text + i);
     }
+    this->AddNullChar();
     return *this;
 }
 

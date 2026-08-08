@@ -10,11 +10,11 @@ private:
     char* text;
     char* AuxiliaryText;
     static std::size_t LengthOfConstChar(const char*);
-
+    void AddNullChar();
 public:
     explicit String();
     explicit String(const String&);
-    explicit String(String&&);
+    explicit String(String&&) noexcept;
     explicit String(const char*);
     explicit String(const std::size_t&);
     [[nodiscard]] char* begin() const;
@@ -26,7 +26,7 @@ public:
     void Copy(const String&);
     [[nodiscard]] std::size_t Capacity() const;
     [[nodiscard]] std::size_t Length() const;
-    [[nodiscard]] const char* Get() const;
+    [[nodiscard]] char* Get() const;
     // operators
     bool operator==(const String&) const;
     String& operator+=(char);
@@ -40,11 +40,18 @@ public:
 
 inline std::istream& operator>>(std::istream& is, String& str) {
     char ch;
-    while (is.get(ch)) {
+    while (is.get( ch )) {
         str += ch;
         if (ch == '\n') {
             break;
         }
     }
     return is;
+}
+
+inline std::ostream& operator<<(std::ostream& os, const String& str) {
+    for (int counter = 0; counter < str.Length(); ++counter ) {
+        os << str[counter];
+    }
+    return os;
 }
