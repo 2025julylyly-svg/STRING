@@ -14,6 +14,7 @@ private:
 
 public:
     explicit String();
+    explicit String(const char*);
     explicit String(const std::size_t&);
     [[nodiscard]] char* begin() const;
     [[nodiscard]] char* end() const;
@@ -22,6 +23,8 @@ public:
     [[nodiscard] ] bool IsEmpty() const;
     [[nodiscard]] bool IsFull() const;
     void Copy(const String&);
+    [[nodiscard]] std::size_t Capacity() const;
+    [[nodiscard]] std::size_t Length() const;
     // operators
     String& operator+=(const char*);
     String& operator+=(const String&);

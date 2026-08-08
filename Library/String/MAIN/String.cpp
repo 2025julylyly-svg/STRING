@@ -2,6 +2,10 @@
 
 String::String() : CharacterNumber( 0 ), capacity( 10 ), text( new char[capacity] ), AuxiliaryText( nullptr ) {}
 
+String::String(const char* str) {
+    const std::size_t STR_LEN = String::LengthOfConstChar( str );
+}
+
 String::String(const std::size_t& CAPACITY) : CharacterNumber( 0 ), capacity( CAPACITY ), text( new char[capacity] ), AuxiliaryText( nullptr ) {}
 
 std::size_t String::LengthOfConstChar(const char* str) {
@@ -57,6 +61,14 @@ void String::Copy(const String& other) {
     for (std::size_t i = 0; i < this->CharacterNumber; ++i) {
         *(this->text + i) = *(other.text + i);
     }
+}
+
+std::size_t String::Capacity() const {
+    return this->capacity;
+}
+
+std::size_t String::Length() const {
+    return this->CharacterNumber;
 }
 
 String& String::operator+=(const char* str) {
