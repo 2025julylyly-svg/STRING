@@ -1,0 +1,11 @@
+{
+  "id" : "0210e378-8300-45a8-b75e-9b9406c3cafc",
+  "title" : "is there a mmory leak in ths code snippet?```cpp\n#include <i...",
+  "createdAt" : 1786109963356,
+  "updatedAt" : 1786111236779,
+  "messages" : [ {
+    "role" : "USER",
+    "content" : "is there a mmory leak in ths code snippet?```cpp\n#include <iostream>\nint main() {\n    char* str = new char[40];\n    str = \"salam peyman\";\n    int index = 0;\n    for (auto ch = str[0]; ch != '\\0'; ch = str[++index] ) {\n        std::cout << ch;\n    }\n    std::cout << std::endl;\n    return 0;\n}\n```",
+    "timestamp" : 1786111236779
+  } ]
+}
