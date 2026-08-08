@@ -1,20 +1,15 @@
 #include "string.h"
 
-#include <cstring>
 String::String() : CharacterNumber( 0 ), capacity( 10 ), text( new char[capacity] ) {}
 
 String::String(const std::size_t& CAPACITY) : CharacterNumber( 0 ), capacity( CAPACITY ), text( new char[capacity] ) {}
-
-void String::Free() {
-    delete[] text;
-}
 
 std::size_t String::LengthOfConstChar(const char* str) {
     if (str == nullptr) {
         return static_cast<std::size_t>(0);
     }
     std::size_t LengthCounter = 0;
-    for (; str[LengthCounter] != '\0'; ++LengthCounter);
+    for (; str[LengthCounter] != '\0'; ++LengthCounter) {}
     return LengthCounter;
 }
 
@@ -34,24 +29,43 @@ bool String::IsFull() const {
     return CharacterNumber == capacity;
 }
 
-void String::Resize() {}
+void String::Resize() {
+    
+}
 
-void String::Clear() {}
+void String::Clear() {
+    this->CharacterNumber = static_cast<std::size_t>(0);
+    this->capacity = static_cast<std::size_t>(10);
+    this->text = nullptr;
+    delete[] text;
+}
 
-void String::Copy(const String& other) {}
+void String::Copy(const String& other) {
+    this->Clear();
+    this->CharacterNumber = other.CharacterNumber;
+    this->capacity = other.capacity;
+    this->text = new char[this->capacity];
+    for (std::size_t i = 0; i < this->CharacterNumber; ++i) {
+        *(this->text + i) = *(other.text + i);
+    }
+}
 
 String& String::operator=(const char* InputString) {
-
+    this->Clear();
+    this->CharacterNumber = String::LengthOfConstChar( InputString );
+    this->capacity = this->CharacterNumber * 2;
+    this->text = new char[this->capacity];
+    for (int i =0;i < this->CharacterNumber; ++i) {
+        *(this->text + i) = *(InputString + i);
+    }
+    return *this;
 }
 
 String& String::operator=(const String& other) {
     if (this == &other) {
         return *this;
     }
-    this->Free();
-    this->CharacterNumber = other.CharacterNumber;
-    this->capacity = other.capacity;
-    this->text = new char[this->capacity];
+    this->Copy( other );
     char other_char = *(other.text + 0);
     int ThisIndexCounter = 0;
     while (other_char != '\0' && ThisIndexCounter < this->CharacterNumber) {
@@ -63,10 +77,10 @@ String& String::operator=(const String& other) {
 
 char String::operator[](const int index) const {
     try {
-        if (index < 0 or index >= CharacterNumber) {
+        if (index < 0 || index >= CharacterNumber) {
             throw IndexOutOfRange();
         }
-        return static_cast<char>(*(text + index));
+        return this->text[index];
     } catch (const IndexOutOfRange& e) {
         std::cerr << "Error: " << e.what();
         std::cout << std::endl;
