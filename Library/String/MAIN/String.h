@@ -27,6 +27,7 @@ public:
     [[nodiscard]] std::size_t Length() const;
     [[nodiscard]] const char* Get() const;
     // operators
+    String& operator+=(const char);
     String& operator+=(const char*);
     String& operator+=(const String&);
     String& operator=(const char*);
@@ -34,3 +35,14 @@ public:
     char operator[](int) const;
     ~String();
 };
+
+inline std::istream& operator>>(std::istream& is, String& str) {
+    char ch;
+    while (is.get(ch)) {
+        str += ch;
+        if (ch == '\n') {
+            break;
+        }
+    }
+    return is;
+}
