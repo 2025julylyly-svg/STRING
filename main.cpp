@@ -2,11 +2,15 @@
 #include "Library/String/MAIN/String.h"
 
 int main() {
-    String str( "" );
-    for (char ch = 'a'; ch <= 'z'; ch++) {
-        str += static_cast<char>(ch - 32);
+    String str("");
+    for (int i =0;i < 10;++i) {
+        for (char ch = 'A'; ch <= 'Z'; ++ch) {
+            str += ch;
+            str += static_cast<char> (ch + 32);
+            str += ' ';
+        }
+        str += " | ";
     }
-    str += " | ";
-    std::cout << str.Get() << std::endl;
+    std::cout << str.Get();
     return 0;
 }

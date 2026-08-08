@@ -4,8 +4,12 @@ String::String() : CharacterNumber( 0 ), capacity( 10 ), text( new char[capacity
 
 String::String(const char* str) : AuxiliaryText( nullptr ) {
     const std::size_t STR_LEN = String::LengthOfConstChar( str );
+    if (STR_LEN == 0) {
+        this->capacity = 10;
+    } else {
+        this->capacity = STR_LEN * 2;
+    }
     this->CharacterNumber = STR_LEN;
-    this->capacity = STR_LEN * 2;
     this->text = new char[this->capacity];
     for (int i = 0; i < this->CharacterNumber; ++i) {
         *(this->text + i) = *(str + i);
