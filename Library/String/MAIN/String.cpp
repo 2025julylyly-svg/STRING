@@ -2,6 +2,27 @@
 
 String::String() : CharacterNumber( 0 ), capacity( 10 ), text( new char[capacity] ), AuxiliaryText( nullptr ) {}
 
+String::String(const String& other) : AuxiliaryText( nullptr ) {
+    this->CharacterNumber = other.CharacterNumber;
+    this->capacity = other.capacity;
+    this->text = new char[this->capacity];
+    for (int i = 0; i < this->CharacterNumber; ++i) {
+        this->text[i] = other.text[i];
+    }
+}
+
+String::String(String&& other) {
+    this->CharacterNumber = other.CharacterNumber;
+    this->capacity = other.capacity;
+    this->text = other.text;
+    this->AuxiliaryText = other.AuxiliaryText;
+
+    other.CharacterNumber = 0;
+    other.capacity = 0;
+    other.text = nullptr;
+    other.AuxiliaryText = nullptr;
+}
+
 String::String(const char* str) : AuxiliaryText( nullptr ) {
     const std::size_t STR_LEN = String::LengthOfConstChar( str );
     if (STR_LEN == 0) {
@@ -169,4 +190,7 @@ char String::operator[](const int index) const {
     return '\0';
 }
 
-String::~String() = default;
+String::~String() {
+    delete[] this->text;
+    text = nullptr;
+}

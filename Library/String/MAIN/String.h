@@ -13,6 +13,8 @@ private:
 
 public:
     explicit String();
+    explicit String(const String&);
+    explicit String(String&&);
     explicit String(const char*);
     explicit String(const std::size_t&);
     [[nodiscard]] char* begin() const;
