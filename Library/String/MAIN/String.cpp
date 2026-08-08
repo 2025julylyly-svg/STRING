@@ -168,6 +168,7 @@ String& String::operator=(const char* InputString) {
     for (int i = 0; i < this->CharacterNumber; ++i) {
         *(this->text + i) = *(InputString + i);
     }
+    this->AddNullChar();
     return *this;
 }
 
