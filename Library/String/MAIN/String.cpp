@@ -55,8 +55,9 @@ void String::Resize() {
 void String::Clear() {
     this->CharacterNumber = static_cast<std::size_t>(0);
     this->capacity = static_cast<std::size_t>(10);
-    this->text = nullptr;
     delete[] text;
+    this->text = nullptr;
+    this->AuxiliaryText = nullptr;
 }
 
 void String::Copy(const String& other) {
@@ -81,7 +82,19 @@ const char* String::Get() const {
     return this->text;
 }
 
-String& String::operator+=(const char character) {
+bool String::operator==(const String& other) const {
+    if (this->CharacterNumber != other.CharacterNumber) {
+        return false;
+    }
+    for (std::size_t i = 0; i < this->CharacterNumber; ++i) {
+        if (*(this->text + i) != *(other.text + i)) {
+            return false;
+        }
+    }
+    return true;
+}
+
+String& String::operator+=(char character) {
     if (this->CharacterNumber + 1 >= this->capacity) {
         this->Resize();
     }

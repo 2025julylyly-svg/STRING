@@ -1,5 +1,4 @@
 #pragma once
-#include <array>
 #include <iostream>
 #include "../Error/IndexOutofReangeError/IndexOutofrange.h"
 
@@ -27,7 +26,8 @@ public:
     [[nodiscard]] std::size_t Length() const;
     [[nodiscard]] const char* Get() const;
     // operators
-    String& operator+=(const char);
+    bool operator==(const String&) const;
+    String& operator+=(char);
     String& operator+=(const char*);
     String& operator+=(const String&);
     String& operator=(const char*);
