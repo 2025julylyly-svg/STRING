@@ -17,8 +17,10 @@ public:
     explicit String(String&&) noexcept;
     explicit String(const char*);
     explicit String(const std::size_t&);
-    [[nodiscard]] char* begin() const;
-    [[nodiscard]] char* end() const;
+    [[nodiscard]] char* begin();
+    [[nodiscard]] const char* begin()const;
+    [[nodiscard]] char* end();
+    [[nodiscard]] const char* end() const;
     void Resize();
     void Clear();
     [[nodiscard] ] bool IsEmpty() const;

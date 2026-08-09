@@ -58,12 +58,20 @@ void String::AddNullChar() {
     *(this->text + this->CharacterNumber) = '\0';
 }
 
-char* String::begin() const {
+char* String::begin() {
+    return this->text;
+}
+
+const char* String::begin() const {
     return text;
 }
 
-char* String::end() const {
+const char* String::end() const {
     return static_cast<char*>(text + CharacterNumber);
+}
+
+char* String::end() {
+    return (this->text + this->CharacterNumber);
 }
 
 bool String::IsEmpty() const {
