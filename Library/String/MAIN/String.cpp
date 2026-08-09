@@ -1,6 +1,8 @@
 #include "String.h"
 
-String::String() : CharacterNumber( 0 ), capacity( 10 ), text( new char[capacity] ), AuxiliaryText( nullptr ) {}
+String::String() : CharacterNumber( 0 ), capacity( 10 ), text( new char[capacity] ), AuxiliaryText( nullptr ) {
+    this->AddNullChar();
+}
 
 String::String(const String& other) : AuxiliaryText( nullptr ) {
     this->CharacterNumber = other.CharacterNumber;
