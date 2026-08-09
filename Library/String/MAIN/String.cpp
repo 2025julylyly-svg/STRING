@@ -91,6 +91,7 @@ void String::Clear() {
     delete[] text;
     this->text = nullptr;
     this->AuxiliaryText = nullptr;
+    this->text = new char[capacity];
 }
 
 void String::Copy(const String& other) {

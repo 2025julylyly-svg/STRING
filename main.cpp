@@ -3,6 +3,9 @@
 
 int main() {
     String str("hello world");
-    std::cout <<str[-1];
+    std::cout << str << std::endl;
+    str.Clear();
+    str += "hello";
+    std::cout <<str << std::endl;
     return 0;
 }
