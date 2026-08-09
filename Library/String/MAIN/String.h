@@ -41,10 +41,10 @@ public:
 inline std::istream& operator>>(std::istream& is, String& str) {
     char ch;
     while (is.get( ch )) {
-        str += ch;
         if (ch == '\n') {
             break;
         }
+        str += ch;
     }
     return is;
 }

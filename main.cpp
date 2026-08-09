@@ -2,9 +2,7 @@
 #include "Library/String/MAIN/String.h"
 
 int main() {
-    String str ("hello");
-    std::cout << str << std::endl;
-    str += " world";
-    std::cout << str << std::endl;
+    String str("hello world");
+    std::cout <<str[-1];
     return 0;
 }

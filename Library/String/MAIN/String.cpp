@@ -188,10 +188,15 @@ String& String::operator=(const String& other) {
 
 char String::operator[](const int index) const {
     try {
-        if (index < 0 || index >= CharacterNumber) {
+        if (const int IndexCheck = 0 - static_cast<int>(CharacterNumber); index >= IndexCheck || index < this->CharacterNumber) {
+            if (index < 0) {
+                return this->text[CharacterNumber + index];
+            }
+            return this->text[index];
+        }
+        else {
             throw IndexOutOfRange();
         }
-        return this->text[index];
     } catch (const IndexOutOfRange& e) {
         std::cerr << "Error: " << e.what();
         std::cout << std::endl;
