@@ -111,10 +111,6 @@ std::size_t String::Length() const {
     return this->CharacterNumber;
 }
 
-char* String::Get() const {
-    return this->begin();
-}
-
 bool String::operator==(const String& other) const {
     if (this->CharacterNumber != other.CharacterNumber) {
         return false;

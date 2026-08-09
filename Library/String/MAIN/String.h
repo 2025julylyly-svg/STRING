@@ -26,7 +26,6 @@ public:
     void Copy(const String&);
     [[nodiscard]] std::size_t Capacity() const;
     [[nodiscard]] std::size_t Length() const;
-    [[nodiscard]] char* Get() const;
     // operators
     bool operator==(const String&) const;
     String& operator+=(char);
