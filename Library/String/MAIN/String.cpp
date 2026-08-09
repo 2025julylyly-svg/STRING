@@ -176,12 +176,6 @@ String& String::operator=(const String& other) {
         return *this;
     }
     this->Copy( other );
-    char other_char = *(other.text + 0);
-    int ThisIndexCounter = 0;
-    while (other_char != '\0' && ThisIndexCounter < this->CharacterNumber) {
-        *(this->text + ThisIndexCounter++) = other_char;
-        other_char = *(other.text + ThisIndexCounter);
-    }
     return *this;
 }
 
