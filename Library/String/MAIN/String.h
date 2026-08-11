@@ -11,6 +11,7 @@ private:
     char* AuxiliaryText;
     static std::size_t LengthOfConstChar(const char*);
     void AddNullChar();
+    void CopyTextToAuxiliaryText() const;
 public:
     explicit String();
     explicit String(const String&);
@@ -22,6 +23,8 @@ public:
     [[nodiscard]] char* end();
     [[nodiscard]] const char* end() const;
     void Resize();
+    void Reserve(const int&& size);
+    void Reserve(const int& size);
     void Clear();
     [[nodiscard] ] bool IsEmpty() const;
     [[nodiscard]] bool IsFull() const;
@@ -30,7 +33,8 @@ public:
     [[nodiscard]] std::size_t Length() const;
     // operators
     bool operator==(const String&) const;
-    String& operator+=(char);
+    String& operator+=(const char&);
+    String& operator+=(const char&&);
     String& operator+=(const char*);
     String& operator+=(const String&);
     String& operator=(const char*);

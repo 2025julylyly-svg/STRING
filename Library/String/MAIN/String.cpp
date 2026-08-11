@@ -44,7 +44,7 @@ String::String(const std::size_t& CAPACITY) : CharacterNumber( 0 ), capacity( CA
 
 std::size_t String::LengthOfConstChar(const char* str) {
     if (str == nullptr) {
-        return static_cast<std::size_t>(0);
+        return 0;
     }
     std::size_t LengthCounter = 0;
     for (; str[LengthCounter] != '\0'; ++LengthCounter) {}
@@ -58,6 +58,12 @@ void String::AddNullChar() {
     *(this->text + this->CharacterNumber) = '\0';
 }
 
+void String::CopyTextToAuxiliaryText() const {
+    for (std::size_t i = 0; i< this->CharacterNumber; ++i) {
+        *(this->AuxiliaryText + i) = *(this->text + i);
+    }
+}
+
 char* String::begin() {
     return this->text;
 }
@@ -67,7 +73,7 @@ const char* String::begin() const {
 }
 
 const char* String::end() const {
-    return static_cast<char*>(text + CharacterNumber);
+    return text + CharacterNumber;
 }
 
 char* String::end() {
@@ -95,13 +101,21 @@ void String::Resize() {
     this->text = this->AuxiliaryText;
 }
 
+void String::Reserve(const int&& size) {
+    this->capacity = this->CharacterNumber + size + 1;
+    AuxiliaryText = new char[this->capacity];
+    this->CopyTextToAuxiliaryText();
+}
+
 void String::Clear() {
-    this->CharacterNumber = static_cast<std::size_t>(0);
-    this->capacity = static_cast<std::size_t>(10);
     delete[] text;
     this->text = nullptr;
     this->AuxiliaryText = nullptr;
-    this->text = new char[capacity];
+    this->CharacterNumber = static_cast<std::size_t>(0);
+    this->capacity = static_cast<std::size_t>(10);
+    text = new char[capacity];
+    AuxiliaryText = text;
+    this->AddNullChar();
 }
 
 void String::Copy(const String& other) {
@@ -134,7 +148,15 @@ bool String::operator==(const String& other) const {
     return true;
 }
 
-String& String::operator+=(char character) {
+String& String::operator+=(const char& character) {
+    if (this->CharacterNumber + 1 >= this->capacity) {
+        this->Resize();
+    }
+    *(this->text + this->CharacterNumber++) = character;
+    this->AddNullChar();
+    return *this;
+}
+String& String::operator+=(const char&& character) {
     if (this->CharacterNumber + 1 >= this->capacity) {
         this->Resize();
     }
