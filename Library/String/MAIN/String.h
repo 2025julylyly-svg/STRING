@@ -12,6 +12,7 @@ private:
     static std::size_t LengthOfConstChar(const char*);
     void AddNullChar();
     void CopyTextToAuxiliaryText() const;
+
 public:
     explicit String();
     explicit String(const String&);
@@ -19,12 +20,12 @@ public:
     explicit String(const char*);
     explicit String(const std::size_t&);
     [[nodiscard]] char* begin();
-    [[nodiscard]] const char* begin()const;
+    [[nodiscard]] const char* begin() const;
     [[nodiscard]] char* end();
     [[nodiscard]] const char* end() const;
     void Resize();
-    void Reserve(const int&& size);
-    void Reserve(const int& size);
+    void Reserve(const int&&);
+    void Reserve(const int&);
     void Clear();
     [[nodiscard] ] bool IsEmpty() const;
     [[nodiscard]] bool IsFull() const;
@@ -55,7 +56,7 @@ inline std::istream& operator>>(std::istream& is, String& str) {
 }
 
 inline std::ostream& operator<<(std::ostream& os, const String& str) {
-    for (int counter = 0; counter < str.Length(); ++counter ) {
+    for (int counter = 0; counter < str.Length(); ++counter) {
         os << str[counter];
     }
     return os;

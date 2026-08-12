@@ -1,5 +1,7 @@
 #include "String.h"
 
+#include <cstring>
+
 String::String() : CharacterNumber( 0 ), capacity( 10 ), text( new char[capacity] ), AuxiliaryText( nullptr ) {
     this->AddNullChar();
 }
@@ -59,7 +61,7 @@ void String::AddNullChar() {
 }
 
 void String::CopyTextToAuxiliaryText() const {
-    for (std::size_t i = 0; i< this->CharacterNumber; ++i) {
+    for (std::size_t i = 0; i < this->CharacterNumber; ++i) {
         *(this->AuxiliaryText + i) = *(this->text + i);
     }
 }
@@ -105,6 +107,16 @@ void String::Reserve(const int&& size) {
     this->capacity = this->CharacterNumber + size + 1;
     AuxiliaryText = new char[this->capacity];
     this->CopyTextToAuxiliaryText();
+    delete[] text;
+    text = AuxiliaryText;
+}
+
+void String::Reserve(const int& size) {
+    this->capacity = this->CharacterNumber + size + 1;
+    AuxiliaryText = new char[this->capacity];
+    this->CopyTextToAuxiliaryText();
+    delete[] text;
+    text = AuxiliaryText;
 }
 
 void String::Clear() {
@@ -156,6 +168,7 @@ String& String::operator+=(const char& character) {
     this->AddNullChar();
     return *this;
 }
+
 String& String::operator+=(const char&& character) {
     if (this->CharacterNumber + 1 >= this->capacity) {
         this->Resize();
@@ -167,9 +180,7 @@ String& String::operator+=(const char&& character) {
 
 String& String::operator+=(const char* str) {
     const std::size_t STR_LEN = String::LengthOfConstChar( str );
-    while (STR_LEN + this->CharacterNumber >= this->capacity) {
-        this->Resize();
-    }
+    this->Reserve( static_cast<int>(STR_LEN) );
     for (std::size_t i = 0; i < STR_LEN; ++i) {
         *(this->text + this->CharacterNumber++) = *(str + i);
     }
@@ -179,9 +190,7 @@ String& String::operator+=(const char* str) {
 
 String& String::operator+=(const String& other) {
     const std::size_t STR_LEN = String::LengthOfConstChar( other.text );
-    while (STR_LEN + this->CharacterNumber >= this->capacity) {
-        this->Resize();
-    }
+    this->Reserve( static_cast<int>(STR_LEN) );
     for (std::size_t i = 0; i < STR_LEN; ++i) {
         *(this->text + this->CharacterNumber++) = *(other.text + i);
     }
