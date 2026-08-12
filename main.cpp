@@ -3,7 +3,7 @@
 
 int main() {
     String str("Hello Peyman!");
-    str += " i`m pouya and i`m student and i`m developer and my name is mohammad pouya hadiyan deljoo";
+    str += " i`m pouya and i`m student and i`m developer and my name is mohammad pouya";
     std::cout << str << std::endl;
     return 0;
 }
