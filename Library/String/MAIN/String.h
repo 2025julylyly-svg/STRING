@@ -30,6 +30,8 @@ public:
     [[nodiscard] ] bool IsEmpty() const;
     [[nodiscard]] bool IsFull() const;
     void Copy(const String&);
+    [[nodiscard]] String substr(const int& ,const int& ) const;
+    [[nodiscard]] String substr(const int&& ,const int&& ) const;
     [[nodiscard]] std::size_t Capacity() const;
     [[nodiscard]] std::size_t Length() const;
     // operators

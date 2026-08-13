@@ -140,6 +140,22 @@ void String::Copy(const String& other) {
     }
 }
 
+String String::substr(const int& start, const int& length) const {
+    String str("");
+    for (int i = start; i < start + length; ++i) {
+        str += text[i];
+    }
+    return static_cast<String>(str);
+}
+
+String String::substr(const int&& start, const int&& length) const {
+    String str("");
+    for (int i = start; i < start + length; ++i) {
+        str += text[i];
+    }
+    return static_cast<String>(str);
+}
+
 std::size_t String::Capacity() const {
     return this->capacity;
 }
