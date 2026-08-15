@@ -17,7 +17,7 @@ public:
     explicit String();
     String(const String&);
     explicit String(String&&) noexcept;
-    String(const char*);
+    explicit String(const char*);
     explicit String(const std::size_t&);
     [[nodiscard]] char* begin();
     [[nodiscard]] const char* begin() const;
