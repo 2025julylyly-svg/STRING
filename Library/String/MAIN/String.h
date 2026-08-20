@@ -1,6 +1,6 @@
 #pragma once
 #include <iostream>
-#include "../Error/IndexOutofReangeError/IndexOutofrange.h"
+#include "../Error/IndexOutofRangeError/IndexOutofrange.h"
 
 class String
 {
